@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacob Pritchett — Senior Software Engineer</title>
+    <meta name="description" content="Senior iOS & macOS Software Engineer with 15+ years crafting world-class experiences on Apple's platforms.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23c8845f'/><text x='50' y='68' font-size='60' font-family='serif' fill='white' text-anchor='middle'>JP</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           TOKENS
+           ═══════════════════════════════════════ */
+        :root {
+            --bg-deep: #08080c;
+            --bg-primary: #0e0e14;
+            --bg-elevated: #151519;
+            --bg-card: #1a1a22;
+            --bg-warm: #f0ebe4;
+            --text-primary: #ece8e1;
+            --text-secondary: #8a8680;
+            --text-muted: #4e4b47;
+            --accent: #c8845f;
+            --accent-hover: #dca07e;
+            --accent-subtle: rgba(200, 132, 95, 0.1);
+            --font-display: 'Cormorant Garamond', 'Georgia', serif;
+            --font-heading: 'Bebas Neue', 'Impact', sans-serif;
+            --font-body: 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
+            --content-width: 920px;
+            --section-gap: 10rem;
+        }
+
+        /* ═══════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: var(--text-primary);
+            background: var(--bg-deep);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        a { color: var(--accent); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--accent-hover); }
+        ::selection { background: var(--accent); color: var(--bg-deep); }
+
+        /* ═══════════════════════════════════════
+           GRAIN OVERLAY
+           ═══════════════════════════════════════ */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ═══════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(8, 8, 12, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 2.5rem;
+            border-bottom: 1px solid rgba(200, 132, 95, 0.08);
+        }
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: 1.2rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        nav.scrolled .nav-logo { opacity: 1; }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* ═══════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-orb {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 132, 95, 0.08) 0%, rgba(200, 132, 95, 0.02) 40%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(60px);
+            pointer-events: none;
+            animation: orbPulse 8s ease-in-out infinite alternate;
+        }
+        @keyframes orbPulse {
+            from { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-name {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            line-height: 0.95;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            animation: fadeUp 1s ease forwards;
+        }
+        .hero-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent);
+            margin: 1.8rem auto;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.25s forwards;
+        }
+        .hero-title {
+            font-family: var(--font-body);
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            opacity: 0;
+            animation: fadeUp 1s ease 0.45s forwards;
+        }
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(0.65rem, 1vw, 0.75rem);
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: 0.6rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.6s forwards;
+        }
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 2.5rem auto 0;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.8s forwards;
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-scroll span {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.3); transform-origin: top; }
+        }
+
+        /* ═══════════════════════════════════════
+           KEYFRAMES
+           ═══════════════════════════════════════ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══════════════════════════════════════
+           SECTION COMMONS
+           ═══════════════════════════════════════ */
+        .section {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .section-label {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-label::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+
+        /* ═══════════════════════════════════════
+           ABOUT
+           ═══════════════════════════════════════ */
+        .about-section {
+            padding-top: var(--section-gap);
+            padding-bottom: var(--section-gap);
+        }
+        .about-text {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+            line-height: 1.6;
+            color: var(--text-primary);
+            max-width: 780px;
+        }
+        .about-text em {
+            font-style: italic;
+            color: var(--accent);
+        }
+        .about-secondary {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-top: 2rem;
+            max-width: 640px;
+        }
+
+        /* ═══════════════════════════════════════
+           STATS BAR
+           ═══════════════════════════════════════ */
+        .stats-bar {
+            background: var(--bg-warm);
+            padding: 4.5rem 2rem;
+            margin: 0;
+        }
+        .stats-inner {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--bg-deep);
+            line-height: 1;
+        }
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #6b6560;
+            margin-top: 0.5rem;
+        }
+        .stat-divider {
+            width: 1px;
+            background: rgba(14, 14, 20, 0.12);
+            justify-self: center;
+        }
+
+        /* ═══════════════════════════════════════
+           EXPERIENCE
+           ═══════════════════════════════════════ */
+        .experience-section {
+            padding-top: var(--section-gap);
+            padding-bottom: 4rem;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--accent), rgba(200, 132, 95, 0.1));
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute;
+            left: -3rem;
+            top: 8px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--bg-deep);
+            border: 2px solid var(--accent);
+            transform: translateX(calc(-50% + 7px));
+            z-index: 2;
+        }
+        .timeline-item.current .timeline-dot {
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(200, 132, 95, 0.15);
+        }
+        .job-company {
+            font-family: var(--font-heading);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+        .job-role {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-top: 0.3rem;
+        }
+        .job-meta {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+            letter-spacing: 0.02em;
+        }
+        .job-description {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 1.2rem;
+            max-width: 600px;
+            line-height: 1.75;
+        }
+        .job-highlights {
+            list-style: none;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .job-highlights li {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            padding-left: 1.2rem;
+            position: relative;
+            line-height: 1.65;
+        }
+        .job-highlights li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 5px;
+            height: 1px;
+            background: var(--accent);
+        }
+        .job-badge {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-subtle);
+            padding: 0.25rem 0.7rem;
+            border-radius: 3px;
+            margin-top: 0.8rem;
+        }
+
+        /* ═══════════════════════════════════════
+           SKILLS & LANGUAGES
+           ═══════════════════════════════════════ */
+        .skills-section {
+            padding-top: 6rem;
+            padding-bottom: var(--section-gap);
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 0;
+        }
+        .skill-group-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: var(--text-primary);
+            margin-bottom: 1.2rem;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill-tag {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            background: var(--bg-elevated);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 0.45rem 1rem;
+            border-radius: 4px;
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+        .skill-tag:hover {
+            border-color: rgba(200, 132, 95, 0.3);
+            color: var(--text-primary);
+        }
+        .lang-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .lang-name {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        .lang-level {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════
+           CONTACT / FOOTER
+           ═══════════════════════════════════════ */
+        .contact-section {
+            padding-top: 4rem;
+            padding-bottom: 6rem;
+            text-align: center;
+        }
+        .contact-heading {
+            font-family: var(--font-display);
+            font-weight: 300;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--text-primary);
+            letter-spacing: 0.03em;
+        }
+        .contact-subtext {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-top: 0.8rem;
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .contact-link {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            padding: 0.8rem 1.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .contact-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: var(--accent-subtle);
+        }
+        .footer-bar {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* ═══════════════════════════════════════
+           SCROLL REVEALS
+           ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            :root { --section-gap: 6rem; }
+            nav { padding: 1rem 1.5rem; }
+            nav.scrolled { padding: 0.8rem 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+            .nav-links a { font-size: 0.65rem; }
+            .hero { padding: 5rem 1.5rem 3rem; }
+            .section { padding: 0 1.5rem; }
+            .stats-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+            .stat-divider { display: none; }
+            .timeline { padding-left: 2rem; }
+            .timeline::before { left: 5px; }
+            .timeline-dot { left: -2rem; }
+            .skills-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .contact-links { flex-direction: column; align-items: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name { letter-spacing: 0.01em; }
+            .nav-logo { display: none; }
+        }
+
+        /* ═══════════════════════════════════════
+           PRINT
+           ═══════════════════════════════════════ */
+        @media print {
+            body::after { display: none; }
+            nav, .hero-orb, .hero-scroll { display: none; }
+            body { background: white; color: #1a1a1a; }
+            .hero { min-height: auto; padding: 2rem 0; }
+            .hero-name { color: #1a1a1a; font-size: 2.5rem; }
+            .stats-bar { background: #f5f5f5; }
+            .stat-number { color: #1a1a1a; }
+            .section { padding: 0; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ════════════ NAVIGATION ════════════ -->
+    <nav id="nav">
+        <div class="nav-logo">Jacob Pritchett</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ════════════ HERO ════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-orb"></div>
+        <div class="hero-content">
+            <h1 class="hero-name">Jacob<br>Pritchett</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-title">Senior Software Engineer</p>
+            <p class="hero-subtitle">iOS · macOS · Full-Stack</p>
+            <p class="hero-tagline">Crafting world-class experiences on Apple's platforms for over fifteen years.</p>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ════════════ ABOUT ════════════ -->
+    <section class="about-section section" id="about">
+        <div class="section-label reveal">About</div>
+        <p class="about-text reveal reveal-delay-1">
+            I build <em>rich, fluid, interactive</em> user experiences — the kind that feel effortless but are anything but. From the NBA's flagship app reaching fans worldwide, to award-winning luxury retail experiences, to mission-critical field tools relied on by hundreds of thousands of technicians every day — I bring the same obsessive attention to detail and passion for excellence to every project.
+        </p>
+        <p class="about-secondary reveal reveal-delay-2">
+            Beyond native Apple development, I bring full-stack web experience — React, Next.js, Bun, and modern server-side tooling. I've been shipping software independently since 2010, with multiple five-star apps on the App Store and a deep love for building things that matter.
+        </p>
+    </section>
+
+    <!-- ════════════ STATS BAR ════════════ -->
+    <section class="stats-bar" id="stats">
+        <div class="stats-inner">
+            <div class="stat reveal">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years on Apple Platforms</div>
+            </div>
+            <div class="stat reveal reveal-delay-1">
+                <div class="stat-number">Award-Winning</div>
+                <div class="stat-label">Glossy Awards "Best Mobile App"</div>
+            </div>
+            <div class="stat reveal reveal-delay-2">
+                <div class="stat-number">5-Star</div>
+                <div class="stat-label">Apps Shipped on the App Store</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════ EXPERIENCE ════════════ -->
+    <section class="experience-section section" id="experience">
+        <div class="section-label reveal">Experience</div>
+
+        <div class="timeline">
+            <!-- NBA -->
+            <div class="timeline-item current reveal">
+                <div class="timeline-dot"></div>
+                <div class="job-company">National Basketball Association</div>
+                <div class="job-role">iOS Software Engineer</div>
+                <div class="job-meta">Dec 2023 – Present · via Mercury Intermedia</div>
+                <p class="job-description">
+                    Helping build the NBA app — connecting basketball fans worldwide with the sport they love.
+                </p>
+                <ul class="job-highlights">
+                    <li>Led development of the new Onboarding flow</li>
+                    <li>Rebuilt the launch screen splash animation</li>
+                    <li>Major architectural refactor: modularized into a protocol-based interface with loose couplings, migrating away from TCA to proper SwiftUI+MV architecture</li>
+                    <li>Developed a unified Apple Universal Link / Deep Link parsing layer — handles all deep links hitting the app</li>
+                    <li>Refactored the analytics architecture across five different providers, delivering accurate, fresh metrics to the data team</li>
+                    <li>Rebuilt the internal Dev Zone — the control panel used by NBA staff and vendors for advanced diagnostics and feature toggling</li>
+                    <li>Built out the video downloader system and content caching decision flow</li>
+                    <li>Rebuilt the weekly game schedule calendar and refactored the banner ad system, boosting successful impressions</li>
+                    <li>Refactored and redesigned the NBA VideoKit SDK reference app, pleasing third-party vendors</li>
+                </ul>
+            </div>
+
+            <!-- Renewed Vision -->
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="job-company">Renewed Vision</div>
+                <div class="job-role">macOS App Developer</div>
+                <div class="job-meta">May 2023 – Nov 2023 · Alpharetta, Georgia</div>
+                <p class="job-description">
+                    Developed ProPresenter — a Mac app used by thousands of churches every weekend and by businesses including Chick-Fil-A and Mercedes-Benz.
+                </p>
+                <ul class="job-highlights">
+                    <li>Feature Lead: coordinated across cross-functional teams to deliver Multi-Output Alpha Keying and a major component revamp</li>
+                    <li>Modularized a multi-million-line codebase using Swift Packages, enabling the broader team to work more efficiently</li>
+                    <li>Produced architectural documentation for complex subsystems, improving shared understanding and developer velocity</li>
+                </ul>
+            </div>
+
+            <!-- Comcast -->
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="job-company">Comcast</div>
+                <div class="job-role">iOS App Developer</div>
+                <div class="job-meta">Feb 2019 – Apr 2023 · Denver, Colorado</div>
+                <p class="job-description">
+                    Built the Xfinity Meter suite — software and tools that hundreds of thousands of field technicians depend on daily to test and diagnose Comcast's cabling infrastructure, both legacy copper and next-gen fiber optic.
+                </p>
+                <ul class="job-highlights">
+                    <li>Built the Xfinity Meter Fiber app from start to finish — trusted with the entire project due to prior success on XM</li>
+                    <li>Spearheaded major refactors to clear legacy code, instituting new architecture and best practices</li>
+                    <li>Re-architected complex systems and built tailor-made support libraries, greatly boosting developer productivity</li>
+                    <li>Increased codebase reliability through unit testing and library-driven code deduplication</li>
+                    <li>Processed and graphed real-time data streams from cable meter devices via HTTP/REST and WebSockets</li>
+                </ul>
+            </div>
+
+            <!-- Owlet -->
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="job-company">Owlet Baby Care</div>
+                <div class="job-role">iOS App Developer</div>
+                <div class="job-meta">Jul 2018 – Dec 2018 · Lehi, Utah</div>
+                <p class="job-description">
+                    Developed the Owlet Cam integration within the Owlet Care app — a smart baby monitor requiring tight IoT integration, streaming live and recorded video from cameras running embedded Linux.
+                </p>
+            </div>
+
+            <!-- Branding Brand -->
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="job-company">Branding Brand</div>
+                <div class="job-role">iOS App Developer</div>
+                <div class="job-meta">Aug 2016 – Aug 2017 · Pittsburgh, Pennsylvania</div>
+                <p class="job-description">
+                    Built and shipped apps for iconic retail brands including Burberry, Arc'teryx, Ace Hardware, and Party City — with a strong focus on UX and visual-motion design.
+                </p>
+                <ul class="job-highlights">
+                    <li>Three-person team built the Burberry iOS app: login, registration, product detail, and more — with a relentless focus on fluid, rich user experience</li>
+                </ul>
+                <div class="job-badge">Winner — Glossy Awards "Best Mobile App"</div>
+            </div>
+
+            <!-- YinzCam -->
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="job-company">YinzCam</div>
+                <div class="job-role">iOS App Developer</div>
+                <div class="job-meta">Dec 2014 – Jul 2016 · Pittsburgh, Pennsylvania</div>
+                <p class="job-description">
+                    Part of the iOS team behind YinzCam's fleet of 100+ official apps for sports teams across the NFL, NBA, NHL, NCAA, NRL, and more.
+                </p>
+                <ul class="job-highlights">
+                    <li>Led the Apple Watch initiative — built WatchKit apps for 50+ clients shortly after Apple's announcement, delivering added competitive value</li>
+                    <li>Kicked off the Objective-C to Swift migration effort</li>
+                    <li>Integrated several third-party SDKs and frameworks into the core codebase</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════ SKILLS & LANGUAGES ════════════ -->
+    <section class="skills-section section" id="skills">
+        <div class="section-label reveal">Toolkit</div>
+        <div class="skills-grid">
+            <div class="reveal">
+                <div class="skill-group-title">Expertise</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Swift</span>
+                    <span class="skill-tag">SwiftUI</span>
+                    <span class="skill-tag">UIKit</span>
+                    <span class="skill-tag">Xcode</span>
+                    <span class="skill-tag">iOS</span>
+                    <span class="skill-tag">macOS</span>
+                    <span class="skill-tag">Swift Concurrency</span>
+                    <span class="skill-tag">Swift Packages</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">WebSockets</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Bun</span>
+                    <span class="skill-tag">AI-Assisted Development</span>
+                    <span class="skill-tag">UI/UX Design</span>
+                </div>
+            </div>
+            <div class="reveal reveal-delay-1">
+                <div class="skill-group-title">Languages</div>
+                <ul class="lang-list">
+                    <li class="lang-item">
+                        <span class="lang-name">English</span>
+                        <span class="lang-level">Native</span>
+                    </li>
+                    <li class="lang-item">
+                        <span class="lang-name">Mandarin Chinese / 中文</span>
+                        <span class="lang-level">Limited Working</span>
+                    </li>
+                    <li class="lang-item">
+                        <span class="lang-name">Spanish / Español</span>
+                        <span class="lang-level">Basic</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════ CONTACT ════════════ -->
+    <section class="contact-section section" id="contact">
+        <div class="reveal">
+            <div class="contact-heading">Let's build something great.</div>
+            <div class="contact-subtext">Always open to interesting projects and conversations.</div>
+        </div>
+        <div class="contact-links reveal reveal-delay-1">
+            <a href="mailto:jobs@jacobpritchett.app" class="contact-link">Email</a>
+            <a href="tel:+12088639248" class="contact-link">Call</a>
+            <a href="https://www.linkedin.com/in/jsyndeo" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+        </div>
+    </section>
+
+    <footer class="footer-bar">
+        &copy; 2026 Jacob Pritchett &middot; Boise, Idaho
+    </footer>
+
+    <!-- ════════════ SCRIPTS ════════════ -->
+    <script>
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        const hero = document.querySelector('.hero');
+        const observerNav = new IntersectionObserver(([entry]) => {
+            nav.classList.toggle('scrolled', !entry.isIntersecting);
+        }, { threshold: 0.1 });
+        observerNav.observe(hero);
+
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
