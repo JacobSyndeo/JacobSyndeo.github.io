@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://jacobpritchett.cv/style.css">
 </head>
 <body>
 
@@ -52,10 +52,11 @@
     <section class="about-section section" id="about">
         <div class="section-label reveal">About</div>
         <p class="about-text reveal reveal-delay-1">
+            Senior iOS/macOS engineer specializing in app-wide architecture, reliability, and UX polish — shipping consumer and enterprise apps at scale.
             I build <em>rich, fluid, interactive</em> user experiences — the kind that feel effortless but are anything but. From the NBA's flagship app reaching fans worldwide, to award-winning luxury retail experiences, to mission-critical field tools relied on by hundreds of thousands of technicians every day — I bring the same obsessive attention to detail and passion for excellence to every project.
         </p>
         <p class="about-secondary reveal reveal-delay-2">
-            Beyond native Apple development, I bring full-stack web experience — React, Next.js, Bun, and modern server-side tooling. I've been shipping software independently since 2010, with multiple five-star apps on the App Store and a deep love for building things that matter.
+            Beyond native Apple development, I bring full-stack web experience — React, Next.js, Bun, and modern server-side tooling. I've been shipping software independently since 2010 (starting in full-stack web), with multiple five-star apps on the App Store and a deep love for building things that matter.
         </p>
     </section>
 
@@ -81,10 +82,10 @@
     <section class="section" id="approach" style="padding-top: var(--section-gap);">
         <div class="section-label reveal">Approach</div>
         <div class="approach-card reveal reveal-delay-1">
-            <p class="about-text">Most engineers will eventually adopt AI tools. I'm not waiting. I use Claude Code and OpenAI Codex daily — in production codebases, on personal projects, and everywhere in between — not as a crutch, but as a <em>force multiplier</em> for the craft I've spent fifteen years honing.</p>
+            <p class="about-text">I use Claude Code and OpenAI Codex daily — not as a crutch, but as a <em>force multiplier</em>. It helps me explore options quickly, reduce busywork, and keep momentum in complex codebases.</p>
         </div>
         <div class="approach-card reveal reveal-delay-2" style="margin-top: 1.5rem;">
-            <p class="about-text">The engineers who thrive next won't be the ones who hid from the future or the ones who leaned on it blindly. They'll be the ones who <em>embraced it boldly</em> — with intent and judgment. That's the work I'm already doing — shipping faster, thinking bigger, and building with a toolset that compounds everything I know.</p>
+            <p class="about-text">I treat AI like any other power tool: it compounds good judgment and exposes weak thinking fast. I use it to explore solutions, reduce busywork, and push through complexity — then I lock it down with review, validation, and tests where they matter. The result is <em>speed with accountability</em>.</p>
         </div>
     </section>
 
@@ -100,18 +101,24 @@
                 <div class="job-role">iOS Software Engineer</div>
                 <div class="job-meta">Dec 2023 – Present · via Mercury Intermedia</div>
                 <p class="job-description">
-                    Helping build the NBA app — connecting basketball fans worldwide with the sport they love.
+                    Shipping app-wide systems and UX improvements across onboarding, routing, analytics, ads, and video playback.
                 </p>
+                <div class="job-description" style="margin-top: 1.25rem; margin-bottom: 0.75rem; font-weight: 600;">Highlights</div>
                 <ul class="job-highlights">
-                    <li>Led development of the new Onboarding flow, improving registration completion and first-session activation</li>
-                    <li>Rebuilt the launch screen splash animation</li>
-                    <li>Major architectural refactor: modularized into a protocol-based interface with loose couplings, migrating away from TCA to proper SwiftUI+MV architecture</li>
-                    <li>Unified all deep link and Universal Link routing into a single parsing layer, eliminating a class of link regression bugs</li>
-                    <li>Refactored analytics across five providers, resolving months of data drift and restoring stakeholder confidence in metrics</li>
-                    <li>Rebuilt the internal Dev Zone, cutting triage-to-repro time for NBA staff and third-party vendors</li>
-                    <li>Built the video downloader and caching layer, reducing redundant requests and improving offline reliability</li>
-                    <li>Rebuilt the game schedule calendar and refactored the banner ad system, measurably improving ad fill rates</li>
-                    <li>Refactored and redesigned the NBA VideoKit SDK reference app, pleasing third-party vendors</li>
+                    <li>Refactored analytics across five providers, resolving long-running data drift and restoring confidence in reporting and decision-making</li>
+                    <li>Led a major architectural refactor: modularized core domains behind protocol-driven interfaces, reducing coupling and enabling safer incremental changes</li>
+                    <li>Unified deep link + Universal Link routing into a single parsing/validation layer, eliminating a class of regressions and simplifying new entry point rollout</li>
+                </ul>
+
+                <div class="job-description" style="margin-top: 1.25rem; margin-bottom: 0.75rem; font-weight: 600;">Additional impact</div>
+                <ul class="job-highlights">
+                    <li>Led development of a new onboarding flow (pending rollout), rebuilding legacy UX while modularizing the codebase and enabling server-driven configuration + robust A/B testing</li>
+                    <li>Integrated complex entitlement checks (TV providers, League Pass, Amazon Prime Video, regional blackouts via location) to guide fans smoothly to “watch” and reduce friction</li>
+                    <li>Built the video downloader + caching layer, reducing redundant requests and improving offline reliability under variable connectivity</li>
+                    <li>Rebuilt the internal Dev Zone, reducing time-to-repro by improving debugging workflows for NBA staff and third-party vendors</li>
+                    <li>Rebuilt the game schedule calendar and refactored the banner ad system, improving rendering reliability and reducing ad-related UI issues</li>
+                    <li>Refined the launch/splash experience, improving polish and hardening startup UI behavior</li>
+                    <li>Refactored and redesigned the NBA VideoKit SDK reference app, improving vendor onboarding and reducing integration back-and-forth</li>
                 </ul>
             </div>
 
@@ -125,9 +132,9 @@
                     Developed ProPresenter — a Mac app used by thousands of churches every weekend and by businesses including Chick-Fil-A and Mercedes-Benz.
                 </p>
                 <ul class="job-highlights">
-                    <li>Feature Lead: coordinated across cross-functional teams to deliver Multi-Output Alpha Keying and a major component revamp</li>
-                    <li>Modularized a multi-million-line codebase with Swift Packages, cutting build times and enabling parallel development</li>
-                    <li>Produced architectural documentation for complex subsystems, improving shared understanding and developer velocity</li>
+                    <li>Feature lead for Multi-Output Alpha Keying and a major component revamp; aligned engineering, QA, and product to land a high-stakes release</li>
+                    <li>Modularized a multi-million-line codebase with Swift Packages, improving build iteration and enabling parallel development across teams</li>
+                    <li>Authored architectural documentation for complex subsystems, reducing tribal knowledge and accelerating onboarding and maintenance</li>
                 </ul>
             </div>
 
@@ -141,11 +148,11 @@
                     Built the Xfinity Meter suite — software and tools that hundreds of thousands of field technicians depend on daily to test and diagnose Comcast's cabling infrastructure, both legacy copper and next-gen fiber optic.
                 </p>
                 <ul class="job-highlights">
-                    <li>Built the Xfinity Meter Fiber app from start to finish — trusted with the entire project due to prior success on XM</li>
-                    <li>Spearheaded major refactors to clear legacy code, instituting new architecture and best practices</li>
-                    <li>Re-architected core systems and built shared support libraries, reducing feature dev time and new-member onboarding friction</li>
-                    <li>Increased codebase reliability through unit testing and library-driven code deduplication</li>
-                    <li>Processed and graphed real-time data streams from cable meter devices via HTTP/REST and WebSockets</li>
+                    <li>Built the Xfinity Meter Fiber app end-to-end, trusted with full ownership based on prior delivery on XM</li>
+                    <li>Re-architected core systems and created shared support libraries, reducing duplication and enabling faster, safer feature development</li>
+                    <li>Drove major refactors to retire legacy patterns and establish clearer architecture and best practices across the codebase</li>
+                    <li>Improved reliability through unit testing and library-driven reuse</li>
+                    <li>Processed and visualized real-time device telemetry via REST and WebSockets, supporting field diagnosis workflows at scale</li>
                 </ul>
             </div>
 
@@ -170,7 +177,9 @@
                     Built and shipped apps for iconic retail brands including Burberry, Arc'teryx, Ace Hardware, and Party City — with a strong focus on UX and visual-motion design.
                 </p>
                 <ul class="job-highlights">
-                    <li>Three-person team built the Burberry iOS app: login, registration, product detail, and more — with a relentless focus on fluid, rich user experience</li>
+                    <li>Shipped premium retail experiences for major brands, with a focus on performance and motion-rich UX</li>
+                    <li>Core contributor on the Burberry iOS app (3-person team), delivering key flows including authentication and product detail experiences</li>
+                    <li>Partnered closely with design and product to translate high-end brand standards into fluid, production-ready UI</li>
                 </ul>
                 <div class="job-badge">Winner — Glossy Awards "Best Mobile App"</div>
             </div>
@@ -185,9 +194,9 @@
                     Part of the iOS team behind YinzCam's fleet of 100+ official apps for sports teams across the NFL, NBA, NHL, NCAA, NRL, and more.
                 </p>
                 <ul class="job-highlights">
-                    <li>Led the Apple Watch initiative — built WatchKit apps for 50+ clients shortly after Apple's announcement, delivering added competitive value</li>
-                    <li>Kicked off the Objective-C to Swift migration effort</li>
-                    <li>Integrated several third-party SDKs and frameworks into the core codebase</li>
+                    <li>Led the Apple Watch initiative, shipping WatchKit apps for 50+ clients shortly after launch to expand product value and differentiation</li>
+                    <li>Initiated and advanced the Objective-C to Swift migration, improving maintainability and enabling modern iOS patterns</li>
+                    <li>Integrated third-party SDKs into the shared core platform, supporting a large fleet of official sports team apps</li>
                 </ul>
             </div>
         </div>
@@ -198,18 +207,31 @@
         <div class="section-label reveal">Toolkit</div>
         <div class="skills-grid">
             <div class="reveal">
-                <div class="skill-group-title">Expertise</div>
+                <div class="skill-group-title">Apple Platforms</div>
                 <div class="skill-tags">
                     <span class="skill-tag">Swift</span>
                     <span class="skill-tag">SwiftUI</span>
                     <span class="skill-tag">UIKit</span>
+                    <span class="skill-tag">Swift Concurrency</span>
                     <span class="skill-tag">Xcode</span>
                     <span class="skill-tag">iOS</span>
                     <span class="skill-tag">macOS</span>
-                    <span class="skill-tag">Swift Concurrency</span>
+                </div>
+
+                <div class="skill-group-title" style="margin-top: 1.25rem;">Architecture & Delivery</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Modularization</span>
                     <span class="skill-tag">Swift Packages</span>
+                    <span class="skill-tag">Deep Linking</span>
+                    <span class="skill-tag">A/B Testing</span>
+                    <span class="skill-tag">Analytics / Observability</span>
+                    <span class="skill-tag">Caching / Offline</span>
                     <span class="skill-tag">REST APIs</span>
                     <span class="skill-tag">WebSockets</span>
+                </div>
+
+                <div class="skill-group-title" style="margin-top: 1.25rem;">Web & Tools</div>
+                <div class="skill-tags">
                     <span class="skill-tag">React</span>
                     <span class="skill-tag">Next.js</span>
                     <span class="skill-tag">TypeScript</span>
