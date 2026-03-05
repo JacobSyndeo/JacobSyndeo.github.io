@@ -445,7 +445,7 @@ nav.scrolled .nav-logo { opacity: 1; }
     content: '';
     position: absolute;
     left: 0;
-    top: 0.55em;
+    top: 0.8em;
     width: 5px;
     height: 1px;
     background: var(--accent);
