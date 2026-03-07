@@ -584,6 +584,10 @@ nav.scrolled .nav-logo { opacity: 1; }
     border-color: var(--accent);
     background: var(--accent-subtle);
 }
+.resume-link {
+    border-color: var(--accent);
+    color: var(--accent);
+}
 .footer-bar {
     text-align: center;
     padding: 2rem;
